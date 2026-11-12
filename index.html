@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -49,11 +50,11 @@
       <div class="case-list">
         <article class="case-card featured">
           <div class="case-art batch-art"><span class="art-label">01 / CLOUD PIPELINE</span><div class="pipeline"><i></i><i></i><i></i><i></i><i></i></div><div class="batch-tags"><b>FILES</b><b>QUEUE</b><b>COMPUTE</b></div></div>
-          <div class="case-copy"><p class="case-number">01</p><h3>Sending Oracle data to a mainframe on AWS</h3><p>Built a Spring Batch and AWS pipeline that moves Oracle data to a mainframe through S3 and Axway, then redesigned it to fix timeouts and race conditions.</p><div class="tags"><span>SPRING BATCH</span><span>AWS BATCH</span><span>S3</span><span>SQS</span></div><a href="case-study-oracle-mainframe.html">Read the case study <b>↗</b></a></div>
+          <div class="case-copy"><p class="case-number">01</p><h3>Sending Oracle data to a mainframe on AWS</h3><p>Built a Spring Batch and AWS pipeline that moves Oracle data to a mainframe through S3 and Axway, then redesigned it to fix timeouts and race conditions. It now handles 10 GB per request.</p><div class="tags"><span>SPRING BATCH</span><span>AWS BATCH</span><span>S3</span><span>SQS</span></div><a href="case-study-oracle-mainframe.html">Read the case study <b>↗</b></a></div>
         </article>
         <article class="case-card dark-card">
           <div class="case-art resilience-art"><span class="art-label">02 / RESILIENCE</span><div class="orbit"><i></i><i></i><i></i><b>+</b></div><p>DESIGNED TO<br>RECOVER</p></div>
-          <div class="case-copy"><p class="case-number">02</p><h3>Hardening services on EKS</h3><p>Improved performance, disaster recovery and resiliency for Spring Boot services on Amazon EKS through iterative and chaos testing. Also helped move a legacy scheduling mechanism to production.</p><div class="tags"><span>JAVA</span><span>EKS</span><span>KAFKA</span><span>CHAOS TESTING</span></div><a href="#contact">Ask about this work <b>↗</b></a></div>
+          <div class="case-copy"><p class="case-number">02</p><h3>Making a Kafka app on EKS resilient</h3><p>Normal retries weren’t enough. I sorted failures into three categories and added a separately deployed DLQ lane, which made the app more resilient and its issues easier to spot.</p><div class="tags"><span>SPRING BOOT</span><span>EKS</span><span>KAFKA</span><span>DLQ</span></div><a href="case-study-eks-kafka-resilience.html">Read the case study <b>↗</b></a></div>
         </article>
         <article class="case-card sky-card">
           <div class="case-art api-art"><span class="art-label">03 / PLATFORM APIs</span><div class="request-lines"><i></i><i></i><i></i><i></i><i></i></div><div class="request-count">100K+<small>REQUESTS / DAY</small></div></div>
@@ -68,9 +69,18 @@
 <li><time>JAN 2018 – JAN 2020</time><div><h3>Application Development Analyst</h3><p>Accenture</p></div><span>Chennai</span></li>
 <li><time>MAY 2016 – DEC 2017</time><div><h3>Associate Software Engineer</h3><p>Accenture</p></div><span>Chennai</span></li></ol></section>
 
+    <section class="tools wrap" id="toolbox"><div class="section-heading"><div><p class="eyebrow"><span></span> TOOLBOX</p><h2>What I reach<br>for.</h2></div><p>The languages, cloud services and practices behind the work above.</p></div><div class="tool-grid"><div class="tool"><h3>Languages and frameworks</h3><div class="chips"><span>Java</span><span>Spring Boot</span><span>Spring Batch</span><span>Python</span><span>REST APIs</span><span>Microservices</span></div></div><div class="tool"><h3>Cloud and infrastructure</h3><div class="chips"><span>AWS Batch</span><span>Lambda</span><span>S3</span><span>DynamoDB</span><span>EKS</span><span>ECR</span><span>CloudWatch</span><span>Terraform</span></div></div><div class="tool"><h3>Messaging and data</h3><div class="chips"><span>Apache Kafka</span><span>Amazon SQS</span><span>EventBridge</span><span>Oracle</span><span>CockroachDB</span><span>GemFire</span></div></div><div class="tool"><h3>Delivery and quality</h3><div class="chips"><span>Jenkins</span><span>Maven</span><span>Git</span><span>GitHub</span><span>Selenium</span><span>Datadog</span><span>Chaos testing</span><span>DR testing</span></div></div></div></section>
+
     <section class="about wrap" id="about"><div class="about-side"><p class="eyebrow"><span></span> BEYOND THE BUILD</p><h2>Calm systems<br>start with curious<br>people.</h2></div><div class="about-copy"><p>I enjoy the work around the work: mentoring newer engineers, untangling difficult systems, and finding small improvements that help a team move faster.</p><p class="muted">Day to day that means designing and testing resilient services, documenting them clearly, and joining sprint planning and retrospectives. I use GitHub Copilot to speed up documentation and code analysis.</p><div class="facts"><div><b>Based in</b><span>Coimbatore, India</span></div><div><b>Languages</b><span>Tamil · English · French · Hindi</span></div><div><b>Education</b><span>B.E., Electrical and Electronics Engineering</span></div><div><b>Ways of working</b><span>Agile · Scrum</span></div></div></div></section>
 
     <section class="contact wrap" id="contact"><p class="eyebrow"><span></span> START A CONVERSATION</p><h2>Have a system<br>worth strengthening?</h2><a href="mailto:mahigohan@gmail.com">mahigohan@gmail.com <b>↗</b></a><div><span>© 2026 MAGHI ARAVINTH GT</span><a href="https://www.linkedin.com/in/maghiaravinthgt22" target="_blank" rel="noreferrer">LINKEDIN ↗</a></div></section>
   </main>
+<script>
+(function(){var els=document.querySelectorAll('.case-card,.roles li,.tool,.facts>div');
+els.forEach(function(e){e.classList.add('rv')});
+if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+els.forEach(function(e){io.observe(e)});})();
+</script>
 </body>
 </html>

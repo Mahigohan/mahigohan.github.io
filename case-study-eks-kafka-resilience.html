@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Case study: making a Kafka consumer app on EKS resilient by classifying failures into non-retryable, retryable and direct-to-DLQ categories and adding a DLQ lane.">
+  <meta name="theme-color" content="#f5f4ee">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Resilient Kafka app on EKS – Maghi Aravinth GT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav wrap">
+    <a class="brand" href="index.html"><span>MA</span> MAGHI ARAVINTH</a>
+    <a class="nav-cta" href="index.html#work">← All case studies</a>
+  </header>
+  <main class="cs wrap">
+    <p class="eyebrow"><span></span> CASE STUDY 02 / RESILIENCE</p>
+    <h1 class="cs-title">Making a Kafka app on EKS resilient to failure</h1>
+    <p class="cs-lede">Normal retries alone didn’t make this Kafka app resilient. What helped was sorting errors into categories, giving each its own handling, and running a separate DLQ lane as its own deployment.</p>
+    <div class="facts cs-facts"><div><b>Service</b><span>A Kafka app on EKS that processes messages and publishes downstream</span></div><div><b>Stack</b><span>Java, Spring Boot, Kafka, Amazon EKS, Avro</span></div><div><b>Pattern</b><span>Three error categories and a DLQ lane</span></div></div>
+
+    <section class="cs-sec">
+      <h2>The service</h2>
+      <p>It’s a Spring Boot app running on EKS. It receives messages from producers, processes the data, and produces the results to a downstream consumer. Because it sits in the middle of other teams’ systems, how it behaves when something goes wrong matters as much as the happy path.</p>
+      <p class="flow-label">THE MAIN LANE</p><ol class="flow"><li>Different producers</li><li>Kafka input topic</li><li>EKS consumer app</li><li>Downstream topic</li></ol>
+    </section>
+
+    <section class="cs-sec">
+      <h2>Why plain retries weren’t enough</h2>
+      <p>Retrying every failure the same way did not solve the resiliency problem. Some errors never succeed on a retry, and some need more time than a short retry window allows. The fix was to separate the failures by type and give them a different lane.</p>
+    </section>
+
+    <section class="cs-sec">
+      <h2>Three kinds of failure</h2>
+      <p>I split the exceptions into three categories, and used them to configure the Kafka consumer’s error handling. The configuration decides which errors are retried at the consumer level and which are acknowledged so the consumer can move on.</p>
+
+      <div class="lane">
+        <span class="lane-tag t-non">Non-retryable</span>
+        <div>
+          <p><strong>Errors:</strong> anything a retry won’t fix, such as a null pointer exception.</p>
+          <p><strong>Handling:</strong> the message is acknowledged and the consumer moves on. The failed message is stored in a database for analysis.</p>
+          <ol class="flow"><li>Error raised</li><li>Acknowledge</li><li>Stored in DB for analysis</li></ol>
+        </div>
+      </div>
+
+      <div class="lane">
+        <span class="lane-tag t-retry">Retryable</span>
+        <div>
+          <p><strong>Errors:</strong> failures that can clear on their own, such as connection problems.</p>
+          <p><strong>Handling:</strong> retried at the consumer level, up to three times as configured. If it still fails after the retries, the message goes to the DLQ topic.</p>
+          <ol class="flow"><li>Error raised</li><li>Retry up to 3 times</li><li>Still failing: DLQ topic</li></ol>
+        </div>
+      </div>
+
+      <div class="lane">
+        <span class="lane-tag t-direct">Direct DLQ</span>
+        <div>
+          <p><strong>Errors:</strong> failures that need more than five or ten seconds to clear, where even exponential retries would still fail. Network delays are one example. Another is parallel transactions that take time to update, which behaves like a race condition.</p>
+          <p><strong>Handling:</strong> sent straight to the DLQ topic, to be processed later.</p>
+          <ol class="flow"><li>Error raised</li><li>DLQ topic directly</li><li>Processed later</li></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-sec">
+      <h2>The DLQ lane</h2>
+      <p>I introduced the DLQ as a lane of its own, running as a separate deployment. It has no consumer-level retries. Instead, when a message in the DLQ fails again, the same message is put back on the DLQ, twice in total, and the retry count is configured in the DLQ’s Avro message.</p>
+      <p>That works because of who owns the payload. I can’t configure retries on the input topic, since the producers are different teams’ systems. DLQ messages are produced by the app itself, so it controls the payload and can carry its own retry settings.</p>
+      <p class="flow-label">THE DLQ LANE</p><ol class="flow"><li class="new">DLQ topic</li><li>Separate DLQ deployment processes it</li><li>Back to DLQ if it fails again, up to 2 times</li></ol>
+    </section>
+
+    <section class="cs-sec">
+      <h2>What made the difference</h2>
+      <p>Normal retries alone did not fix the resiliency problem. Segregating the exceptions into types, and giving failures a separate lane with its own deployment, did. The system became more resilient, and because each category ends up in its own place, issues are easier to identify.</p>
+    </section>
+
+    <div class="cs-end"><a class="button text" href="index.html#work">← Back to all case studies</a><a class="button text" href="mailto:mahigohan@gmail.com">Talk about this work <b>↗</b></a></div>
+  </main>
+</body>
+</html>
