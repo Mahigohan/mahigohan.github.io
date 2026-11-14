@@ -20,8 +20,8 @@
   <main class="cs wrap">
     <p class="eyebrow"><span></span> CASE STUDY 01 / CLOUD PIPELINE</p>
     <h1 class="cs-title">Getting Oracle data onto a mainframe, reliably</h1>
-    <p class="cs-lede">Data in a modern Oracle database had to reach a mainframe that expects one specific file name, in the right order, every time. The first version worked until files got large and requests arrived together. The second has been stable in production.</p>
-    <div class="facts cs-facts"><div><b>Problem</b><span>Deliver Oracle data to a mainframe through Axway</span></div><div><b>Stack</b><span>Spring Batch, AWS Batch, S3, Lambda, SQS, EKS, Axway, Oracle</span></div><div><b>Status</b><span>MVP2 stable in production</span></div></div>
+    <p class="cs-lede">Data in a modern Oracle database had to reach a mainframe that expects one specific file name, in the right order, every time. The first version worked until files got large and requests arrived together. The redesign has run stably in production and handles 10 GB per request.</p>
+    <div class="facts cs-facts"><div><b>Problem</b><span>Deliver Oracle data to a mainframe through Axway</span></div><div><b>Stack</b><span>Spring Batch, AWS Batch, S3, Lambda, SQS, EKS, Axway, Oracle</span></div><div><b>Status</b><span>Stable in production, 10 GB per request</span></div></div>
 
     <section class="cs-sec">
       <h2>The goal</h2>
@@ -45,14 +45,14 @@
 
     <section class="cs-sec">
       <h2>MVP2: the fixes</h2>
-      <p><strong>For the timeouts,</strong> we split the output in Spring Batch itself, into files of about one million records (around 1 GB) each. AWS Batch has no timeout limit like Lambda and offers several compute environment options, so the heavy work moved to where it fits.</p>
-      <p><strong>For the race conditions,</strong> we introduced SQS so files are processed in sequence, and used a dedicated EKS application, instead of Lambda, to handle the large transfer to Axway.</p>
-      <p class="flow-label">MVP2 (changes highlighted)</p><ol class="flow"><li>Oracle DB</li><li class="new">Spring Batch on AWS Batch: split files</li><li>S3</li><li class="new">SQS</li><li class="new">EKS transfer app</li><li>Axway</li><li>Mainframe</li></ol>
+      <p><strong>For the timeouts,</strong> I split the output in Spring Batch itself, into files of about one million records (around 1 GB) each. AWS Batch has no timeout limit like Lambda and offers several compute environment options, so the heavy work moved to where it fits.</p>
+      <p><strong>For the race conditions,</strong> I introduced SQS so files are placed in Axway in sequence. The files still live in S3. The queue carries only each file’s name plus one piece of metadata that identifies the total number of files in that request.</p><p>I then built a dedicated EKS application to handle the large transfer instead of Lambda. It reads the SQS messages, takes the file names from them, pulls those files from S3 and places them in Axway.</p>
+      <p class="flow-label">MVP2 (changes highlighted)</p><ol class="flow"><li>Oracle DB</li><li class="new">Spring Batch on AWS Batch: split files</li><li>S3</li><li class="new">SQS: file names and metadata</li><li class="new">EKS transfer app</li><li>Axway</li><li>Mainframe</li></ol><p class="flow-note">Files stay in S3. The queue carries only names and metadata, and the EKS app fetches each file from S3.</p>
     </section>
 
     <section class="cs-sec">
       <h2>Outcome</h2>
-      <p>MVP2 solved both problems and became stable in production.</p>
+      <p>MVP2 solved both problems and became stable in production. Where MVP1 started failing at 2 to 3 GB, the pipeline now handles 10 GB per request, split into about ten files of roughly 1 GB each.</p>
     </section>
 
     <div class="cs-end"><a class="button text" href="index.html#work">← Back to all case studies</a><a class="button text" href="mailto:mahigohan@gmail.com">Talk about this work <b>↗</b></a></div>
