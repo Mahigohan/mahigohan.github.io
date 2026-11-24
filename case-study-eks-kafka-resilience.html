@@ -11,11 +11,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>if(localStorage.getItem("portfolio-theme")==="gotham")document.documentElement.dataset.theme="gotham"</script><script src="theme.js" defer></script>
 </head>
 <body>
   <header class="nav wrap">
     <a class="brand" href="index.html"><span>MA</span> MAGHI ARAVINTH</a>
-    <a class="nav-cta" href="index.html#work">← All case studies</a>
+    <div class="nav-actions"><button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to Gotham theme"><span aria-hidden="true">◐</span> Gotham</button><a class="nav-cta" href="index.html#work">← All case studies</a></div>
   </header>
   <main class="cs wrap">
     <p class="eyebrow"><span></span> CASE STUDY 02 / RESILIENCE</p>

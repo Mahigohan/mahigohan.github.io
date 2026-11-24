@@ -13,15 +13,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script>document.documentElement.classList.add("js")</script>
+  <script>document.documentElement.classList.add("js");if(localStorage.getItem("portfolio-theme")==="gotham")document.documentElement.dataset.theme="gotham"</script>
   <link rel="stylesheet" href="styles.css">
+  <script src="theme.js" defer></script>
 </head>
 <body>
   <div class="page-glow glow-one"></div><div class="page-glow glow-two"></div>
   <header class="nav wrap">
     <a class="brand" href="#top"><span>MA</span> MAGHI ARAVINTH</a>
     <nav aria-label="Main navigation"><a href="#work">Case studies</a><a href="#experience">Experience</a><a href="#about">About</a><a href="beyond.html">Beyond the code</a><a href="#contact">Contact</a></nav>
-    <a class="nav-cta" href="mailto:mahigohan@gmail.com">Let’s talk <span>↗</span></a>
+    <div class="nav-actions"><button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to Gotham theme"><span aria-hidden="true">◐</span> Gotham</button><a class="nav-cta" href="mailto:mahigohan@gmail.com">Let’s talk <span>↗</span></a></div>
   </header>
 
   <main id="top">
@@ -68,14 +69,16 @@
 <li><time>JAN 2018 – JAN 2020</time><div><h3>Application Development Analyst</h3><p>Accenture</p></div><span>Chennai</span></li>
 <li><time>MAY 2016 – DEC 2017</time><div><h3>Associate Software Engineer</h3><p>Accenture</p></div><span>Chennai</span></li></ol></section>
 
-    <section class="tools wrap" id="toolbox"><div class="section-heading"><div><p class="eyebrow"><span></span> TOOLBOX</p><h2>What I reach<br>for.</h2></div><p>The languages, cloud services and practices behind the work above.</p></div><div class="tool-grid"><div class="tool"><h3>Languages and frameworks</h3><div class="chips"><span>Java</span><span>Spring Boot</span><span>Spring Batch</span><span>Python</span><span>REST APIs</span><span>Microservices</span></div></div><div class="tool"><h3>Cloud and infrastructure</h3><div class="chips"><span>AWS Batch</span><span>Lambda</span><span>S3</span><span>DynamoDB</span><span>EKS</span><span>ECR</span><span>CloudWatch</span><span>Terraform</span></div></div><div class="tool"><h3>Messaging and data</h3><div class="chips"><span>Apache Kafka</span><span>Amazon SQS</span><span>EventBridge</span><span>Oracle</span><span>CockroachDB</span><span>GemFire</span></div></div><div class="tool"><h3>Delivery and quality</h3><div class="chips"><span>Jenkins</span><span>Maven</span><span>Git</span><span>GitHub</span><span>Selenium</span><span>Datadog</span><span>Chaos testing</span><span>DR testing</span></div></div></div></section>
+    <section class="skill-rail wrap" aria-label="Engineering toolkit"><p class="eyebrow"><span></span> ENGINEERING TOOLKIT</p><div><span>Java</span><span>Spring Boot</span><span>AWS</span><span>Terraform</span><span>Kafka</span><span>Spring Batch</span><span>EKS</span><span>REST APIs</span><span>Performance testing</span></div></section>
+
+    <section class="beyond-feature wrap" id="beyond"><div class="beyond-feature-copy"><p class="eyebrow"><span></span> BEYOND THE CODE</p><h2>The systems I enjoy<br>are not always<br>software.</h2><p>Thrillers with a moral knot. Open-world games with a long horizon. Books that make history and ideas feel close. The things I return to shape how I think about stories, systems, and details.</p><a class="button primary" href="beyond.html">Step beyond the code <b>↗</b></a></div><div class="beyond-feature-picks" aria-label="Personal interests"><div><small>WATCH</small><b>Thrillers<br>&amp; mysteries</b></div><div><small>PLAY</small><b>Open-world<br>&amp; fighting games</b></div><div><small>READ</small><b>Tamil history<br>&amp; philosophy</b></div></div></section>
 
     <section class="about wrap" id="about"><div class="about-side"><p class="eyebrow"><span></span> BEYOND THE BUILD</p><h2>Calm systems<br>start with curious<br>people.</h2></div><div class="about-copy"><p>I enjoy the work around the work: mentoring newer engineers, untangling difficult systems, and finding small improvements that help a team move faster.</p><p class="muted">Day to day that means designing and testing resilient services, documenting them clearly, and joining sprint planning and retrospectives. I use GitHub Copilot to speed up documentation and code analysis.</p><div class="facts"><div><b>Based in</b><span>Coimbatore, India</span></div><div><b>Languages</b><span>Tamil · English · French · Hindi</span></div><div><b>Education</b><span>B.E., Electrical and Electronics Engineering</span></div><div><b>Ways of working</b><span>Agile · Scrum</span></div></div><a class="button text" href="beyond.html" style="display:inline-block;margin-top:28px">Beyond the code <b>↗</b></a></div></section>
 
     <section class="contact wrap" id="contact"><p class="eyebrow"><span></span> START A CONVERSATION</p><h2>Have a system<br>worth strengthening?</h2><a href="mailto:mahigohan@gmail.com">mahigohan@gmail.com <b>↗</b></a><div><span>© 2026 MAGHI ARAVINTH GT</span><a href="https://www.linkedin.com/in/maghiaravinthgt22" target="_blank" rel="noreferrer">LINKEDIN ↗</a></div></section>
   </main>
 <script>
-(function(){var els=document.querySelectorAll('.case-card,.roles li,.tool,.facts>div,.also-list li');
+(function(){var els=document.querySelectorAll('.case-card,.roles li,.facts>div,.also-list li,.beyond-feature');
 els.forEach(function(e){e.classList.add('rv')});
 if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
