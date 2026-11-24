@@ -62,3 +62,6 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--link);outline-offse
 .also-list h3{margin:0;font-size:19px;letter-spacing:-.03em;line-height:1.25}
 .also-list p{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
 @media(max-width:800px){.case-list{grid-template-columns:1fr}.also{padding-top:80px}.also-list li{grid-template-columns:1fr}}
+.contact{padding-left:max(32px,calc((100% - 1116px)/2));padding-right:max(32px,calc((100% - 1116px)/2))}
+.contact>*{max-width:none;margin-left:0;margin-right:0}
+@media(max-width:800px){.contact{padding-left:20px;padding-right:20px}}
