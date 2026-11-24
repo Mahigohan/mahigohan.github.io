@@ -54,3 +54,11 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--link);outline-offse
 .lane p{margin:0 0 8px;font-size:16px}
 .lane .flow{margin:12px 0 0}
 @media(max-width:800px){.lane{grid-template-columns:1fr}.lane-tag{justify-self:start}}
+
+.case-list{grid-template-columns:repeat(2,1fr)}
+.also{padding-top:115px}
+.also-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.also-list li{display:grid;grid-template-columns:260px 1fr;gap:8px 30px;padding:22px 0;border-bottom:1px solid var(--line)}
+.also-list h3{margin:0;font-size:19px;letter-spacing:-.03em;line-height:1.25}
+.also-list p{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
+@media(max-width:800px){.case-list{grid-template-columns:1fr}.also{padding-top:80px}.also-list li{grid-template-columns:1fr}}
