@@ -129,3 +129,25 @@ html[data-theme="gotham"] body,html[data-theme="gotham"] body *{cursor:none!impo
 
 /* Personal photography is deliberately roomy: landscape and portrait frames keep their own pace. */
 .photo-section{margin-top:66px}.photo-heading{justify-content:space-between;align-items:end}.photo-heading h2{max-width:570px;font-size:clamp(38px,4.7vw,62px)}.photo-heading>p{max-width:275px;margin:0;color:var(--muted);font-size:14px;line-height:1.65}.photo-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.photo{grid-column:span 4;overflow:hidden;margin:0;border-radius:10px;background:var(--ink)}.photo-wide{grid-column:span 6}.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .45s ease}.photo-wide img{aspect-ratio:16/10}.photo-tall img{aspect-ratio:3/4}.photo:hover img{transform:scale(1.035)}.photo figcaption{padding:12px 2px 2px}.photo h3{margin:0;color:var(--text);font-size:15px;letter-spacing:-.025em}.photo p{margin:4px 0 0;color:var(--muted);font:10px 'DM Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}@media(max-width:800px){.photo{grid-column:span 6}.photo-wide{grid-column:span 12}}@media(max-width:560px){.photo-grid{grid-template-columns:1fr;gap:22px}.photo,.photo-wide{grid-column:auto}.photo-heading{align-items:start}.photo-heading>p{max-width:340px}.photo img,.photo-wide img{aspect-ratio:4/3}.photo-tall img{aspect-ratio:3/4}}@media(prefers-reduced-motion:reduce){.photo img{transition:none}}
+
+/* ---- Photography: polaroid tiles ---- */
+.photo-section{--polaroid:#fbfaf6;--polaroid-ink:#1b222b;--polaroid-muted:#5c616b}
+.photo-section .photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px 26px;padding:14px 6px 6px}
+.photo-section .photo-grid .photo{grid-column:auto;display:flex;flex-direction:column;margin:0;padding:12px 12px 0;border-radius:3px;overflow:visible;background:var(--polaroid);box-shadow:0 1px 2px rgba(0,0,0,.18),0 16px 28px -16px rgba(0,0,0,.6);transform:rotate(var(--tilt,0deg));transition:transform .3s ease,box-shadow .3s ease}
+.photo-section .photo-grid .photo:nth-child(1){--tilt:-2.2deg}
+.photo-section .photo-grid .photo:nth-child(2){--tilt:1.6deg}
+.photo-section .photo-grid .photo:nth-child(3){--tilt:-1.2deg}
+.photo-section .photo-grid .photo:nth-child(4){--tilt:2.4deg}
+.photo-section .photo-grid .photo:nth-child(5){--tilt:1.8deg}
+.photo-section .photo-grid .photo:nth-child(6){--tilt:-2deg}
+.photo-section .photo-grid .photo:nth-child(7){--tilt:1.2deg}
+.photo-section .photo-grid .photo:nth-child(8){--tilt:-1.8deg}
+.photo-section .photo-grid .photo:hover{transform:rotate(0deg) translateY(-6px) scale(1.02);box-shadow:0 2px 4px rgba(0,0,0,.2),0 24px 34px -16px rgba(0,0,0,.65);z-index:2}
+.photo-section .photo img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;background:#d9d6cf;transition:none}
+.photo-section .photo:hover img{transform:none}
+.photo-section .photo figcaption{padding:14px 4px 16px;min-height:76px}
+.photo-section .photo h3{margin:0;color:var(--polaroid-ink);font-size:15px;line-height:1.25;letter-spacing:-.02em}
+.photo-section .photo p{margin:5px 0 0;color:var(--polaroid-muted);font:10px/1.4 'DM Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:1000px){.photo-section .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 20px}}
+@media(max-width:520px){.photo-section .photo-grid{gap:24px 14px;padding-left:2px;padding-right:2px}.photo-section .photo-grid .photo{padding:8px 8px 0}.photo-section .photo figcaption{padding:10px 2px 12px;min-height:64px}.photo-section .photo h3{font-size:13px}.photo-section .photo p{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.photo-section .photo-grid .photo{transition:none}.photo-section .photo-grid .photo:hover{transform:rotate(var(--tilt,0deg))}}
