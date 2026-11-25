@@ -13,5 +13,10 @@
     else { document.documentElement.dataset.theme = 'gotham'; localStorage.setItem(key, 'gotham'); }
     sync();
   });
+  document.addEventListener('pointermove', (event) => {
+    if (document.documentElement.dataset.theme !== 'gotham') return;
+    document.documentElement.style.setProperty('--spotlight-x', `${event.clientX}px`);
+    document.documentElement.style.setProperty('--spotlight-y', `${event.clientY}px`);
+  }, { passive: true });
   sync();
 })();
